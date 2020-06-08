@@ -59,13 +59,8 @@ export default function Scoreboard() {
 	const sortByLetter = () => {
 		// You can't sort state, first duplicate, then sort
 		const newScoreboard = [...scoreBoard].sort((playerA, playerB) => {
-			if (playerA.name.toUpperCase() > playerB.name.toUpperCase()) {
-				return 1
-			}
-			if (playerA.name.toUpperCase() === playerB.name.toUpperCase()) {
-				return 0
-			}
-			return -1
+
+			return playerA.name.localeCompare(playerB.name, 'en', { sensitivity: 'base' })
 		})
 
 		setScoreBoard(newScoreboard)
