@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Scoreboard from './components/scoreboard/scoreboard';
 
 function App() {
