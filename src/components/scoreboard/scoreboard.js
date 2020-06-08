@@ -58,7 +58,7 @@ export default function Scoreboard() {
 
 	const sortByLetter = () => {
 		// You can't sort state, first duplicate, then sort
-		const newScoreboard = scoreBoard.map((player) => player).sort((playerA, playerB) => {
+		const newScoreboard = [...scoreBoard].sort((playerA, playerB) => {
 			if (playerA.name.toUpperCase() > playerB.name.toUpperCase()) {
 				return 1
 			}
@@ -73,7 +73,7 @@ export default function Scoreboard() {
 
 	const addNewPlayer = (newPlayerName) => {
 		console.log('adding new player', newPlayerName)
-		const newScoreboard = scoreBoard.map(player => player)
+		const newScoreboard = [...scoreBoard]
 		newScoreboard.push({
 			name: newPlayerName,
 			score: 0
