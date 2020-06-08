@@ -122,7 +122,7 @@ export default function Scoreboard() {
 
 			/>
 			{[...scoreBoard].sort(sortPlayers).map((player) =>
-				<PlayerGridItem player={player} increaseScore={increaseScore} key={player.id} />
+				<PlayerGridItem player={player} increaseScore={increaseScore} key={player.id} winnerScore={winnerScore} />
 			)}
 			<AddNewPlayer addNewPlayer={addNewPlayer} />
 		</div>
