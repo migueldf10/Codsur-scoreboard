@@ -55,7 +55,7 @@ export default function Scoreboard() {
 			if (playerA.score > playerB.score) {
 				return -1
 			}
-			if (playerA.score = playerB.score) {
+			if (playerA.score === playerB.score) {
 				return 0
 			}
 			return 1
@@ -65,7 +65,6 @@ export default function Scoreboard() {
 
 
 	const addNewPlayer = (newPlayerName) => {
-		console.log('adding new player', newPlayerName)
 		const newScoreboard = [...scoreBoard]
 		newScoreboard.push({
 			id: scoreBoard.length + 1,
