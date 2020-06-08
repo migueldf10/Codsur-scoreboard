@@ -7,9 +7,9 @@ export default function ControlBar(props) {
 			<button onClick={randomizeScores}>Randomize Scores</button>
 			<button onClick={restartScores}>Restart Scores</button>
 			{sortByLetterActive ?
-				<button onClick={toggleSorting}>Sort by Score</button>
+				<button onClick={toggleSorting}>Sorting by score, change</button>
 				:
-				<button onClick={toggleSorting}>Sort by Letter</button>
+				<button onClick={toggleSorting}>Sorting alphabetically, change</button>
 			}
 
 		</div >
