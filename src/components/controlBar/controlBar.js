@@ -1,13 +1,17 @@
 import React from 'react'
 import './controlBar.scss'
 export default function ControlBar(props) {
-	const { sortByScore, sortByLetter, restartScores, randomizeScores } = props
+	const { restartScores, randomizeScores, toggleSorting, sortByLetterActive } = props
 	return (
 		<div className="control-bar">
 			<button onClick={randomizeScores}>Randomize Scores</button>
 			<button onClick={restartScores}>Restart Scores</button>
-			<button onClick={sortByScore}>Sort by score</button>
-			<button onClick={sortByLetter}>Sort by letter</button>
+			{sortByLetterActive ?
+				<button onClick={toggleSorting}>Sort by Score</button>
+				:
+				<button onClick={toggleSorting}>Sort by Letter</button>
+			}
+
 		</div >
 	)
 }

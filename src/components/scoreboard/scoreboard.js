@@ -5,18 +5,22 @@ import Header from '../header/header'
 import AddNewPlayer from '../addNewPlayer/addNewPlayer'
 const hardCodedUsers = [
 	{
+		id: 1,
 		name: "Miguel",
 		score: 3
 	},
 	{
+		id: 2,
 		name: "Juan",
 		score: 1
 	},
 	{
+		id: 3,
 		name: "Alicia",
 		score: 6
 	},
 	{
+		id: 4,
 		name: "Mari",
 		score: 5
 	},
@@ -25,11 +29,12 @@ const hardCodedUsers = [
 export default function Scoreboard() {
 
 	const [scoreBoard, setScoreBoard] = useState(hardCodedUsers)
+	const [sortByLetterActive, setSortByLetterActive] = useState(true)
 
-	const increaseScore = (index) => {
-		const newScoreboard = scoreBoard.map((player, playerIndex) => {
+	const increaseScore = (playerToChange) => {
+		const newScoreboard = scoreBoard.map((player) => {
 			// Duplicates the array, player by player
-			if (playerIndex === index) {
+			if (player.id === playerToChange.id) {
 				const updatedPlayer = { ...player }
 				// spreads the object in order to duplicate (not reference original)
 				updatedPlayer.score++
@@ -41,41 +46,33 @@ export default function Scoreboard() {
 		setScoreBoard(newScoreboard)
 	}
 
-	const sortByScore = () => {
-		// You can't sort state, first duplicate, then sort
-		const newScoreboard = scoreBoard.map((player) => player).sort((playerA, playerB) => {
+	const toggleSorting = () => {
+		setSortByLetterActive(!sortByLetterActive)
+	}
+
+	const sortPlayers = (playerA, playerB) => {
+		if (sortByLetterActive) {
 			if (playerA.score > playerB.score) {
 				return -1
 			}
-			if (playerA.score === playerB.score) {
+			if (playerA.score = playerB.score) {
 				return 0
 			}
-			return +1
-		})
-
-		setScoreBoard(newScoreboard)
+			return 1
+		}
+		return playerA.name.localeCompare(playerB.name, 'en', { sensitivity: 'base' })
 	}
 
-	const sortByLetter = () => {
-		// You can't sort state, first duplicate, then sort
-		const newScoreboard = [...scoreBoard].sort((playerA, playerB) => {
-
-			return playerA.name.localeCompare(playerB.name, 'en', { sensitivity: 'base' })
-		})
-
-		setScoreBoard(newScoreboard)
-	}
 
 	const addNewPlayer = (newPlayerName) => {
 		console.log('adding new player', newPlayerName)
 		const newScoreboard = [...scoreBoard]
 		newScoreboard.push({
+			id: scoreBoard.length + 1,
 			name: newPlayerName,
 			score: 0
 		})
 		setScoreBoard(newScoreboard)
-
-
 	}
 
 	const restartScores = () => {
@@ -114,24 +111,20 @@ export default function Scoreboard() {
 
 
 
-
 	return (
 		<div>
-
 			<Header winnerPlayers={winnerPlayers} winnerScore={winnerScore} />
 			<ControlBar
-				sortByScore={sortByScore}
-				sortByLetter={sortByLetter}
 				restartScores={restartScores}
 				randomizeScores={randomizeScores}
+				sortByLetterActive={sortByLetterActive}
+				toggleSorting={toggleSorting}
+
 			/>
-			{scoreBoard.map((player, index) =>
-				<PlayerGridItem player={player} index={index} increaseScore={increaseScore} key={index} />
+			{[...scoreBoard].sort(sortPlayers).map((player) =>
+				<PlayerGridItem player={player} increaseScore={increaseScore} key={player.id} />
 			)}
 			<AddNewPlayer addNewPlayer={addNewPlayer} />
-
-
-
 		</div>
 	)
 }
