@@ -9,8 +9,8 @@ export default function Header(props) {
 		<div>
 			<h1>
 				{winnerPlayers.length > 1 ?
-					`The winners are ${winnerPlayers.map(player => player.name).join(' & ')} with a score of ${winnerScore}`
-					: `The winner is ${winnerPlayers[0].name} With a score of ${winnerScore}`}
+					`The winners are ${winnerPlayers.map(player => player.name).join(' & ')} even, with a score of ${winnerScore}`
+					: `The winner is ${winnerPlayers[0].name} with a score of ${winnerScore}`}
 			</h1>
 		</div>
 	)
