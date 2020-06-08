@@ -1,0 +1,11 @@
+.control-bar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	padding: 12px 0;
+	font-size: 0.8rem;
+	button {
+		font-size: 1.2em;
+	}
+}
